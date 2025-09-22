@@ -1,14 +1,25 @@
 import { Routes } from '@angular/router';
-import { Login } from './login/login';
+import { LoginComponent } from './login/login';
 import { Products } from './products/products';
-export const routes: Routes = [
+import { authGuard } from './auth.guard';
 
-    {
-        path:'products',
-        component:Products
-    },
-    {
-        path:'login',
-        component:Login
-    }
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'login',   // 👈 default route → login
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'products',
+    component: Products,
+    canActivate: [authGuard]   // 👈 guarded route
+  },
+  {
+    path: '**',
+    redirectTo: 'login'   // fallback to login
+  }
 ];
