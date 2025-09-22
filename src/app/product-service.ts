@@ -1,0 +1,20 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+}
+
+@Injectable({ providedIn: 'root' })
+export class ProductService {
+  private apiUrl = 'https://765ac5e9-a27d-4c3e-9426-e2e6ff8f3803.mock.pstmn.io/products';
+
+  constructor(private http: HttpClient) {}
+
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl);
+  }
+}
