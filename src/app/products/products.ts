@@ -37,10 +37,22 @@ export class Products implements OnInit {
       const p = this.productForm.value;
       if (p.id === 0) {
         p.id = this.products.length + 1;
-        this.products.push(p);
+        this.service.addProduct(p).subscribe(
+          (data: any) => { 
+            this.products.push(data);
+            console.log(data);
+          },
+          () => { this.error = 'Failed to load products'; }
+        );
       } else {
         const index = this.products.findIndex(x => x.id === p.id);
-        this.products[index] = p;
+        this.service.updateproduct(p).subscribe(
+          (data: any) => { 
+            this.products[index]=data;
+            console.log(data);
+          },
+          () => { this.error = 'Failed to load products'; }
+        )
       }
       this.productForm.reset({ id: 0, name: '', description: '' });
     }
@@ -51,6 +63,12 @@ export class Products implements OnInit {
   }
 
   delete(product: Product) {
-    this.products = this.products.filter(p => p.id !== product.id);
+    this.service.deleteProduct(product.id).subscribe(
+      (data:any )=> { 
+            this.products= this.products.filter(p => p.id !== product.id);
+            console.log(data);
+          },
+          () => { this.error = 'Failed to load products'; }
+    )
   }
 }

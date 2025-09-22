@@ -21,9 +21,9 @@ private http=inject(HttpClient);
     return this.http.post(this.apiUrl, p);
   }
   updateproduct(p: Product) {
-    return this.http.put(`${this.apiUrl}/${p.id}`, p)
+    return this.http.put(`${this.apiUrl}?id=${p.id}`, p)
   }
   deleteProduct(id: number) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}?id=${id}`);
   }
 }
