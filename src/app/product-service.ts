@@ -12,17 +12,17 @@ export interface Product {
 export class ProductService {
   private apiUrl = 'https://765ac5e9-a27d-4c3e-9426-e2e6ff8f3803.mock.pstmn.io/products';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl);
   }
-   addProduct(p: Product) {
+  addProduct(p: Product) {
     return this.http.post(this.apiUrl, p);
   }
-updateproduct(p:Product){
-  return this.http.post(`${this.apiUrl}/${p.id}`,p)
-}
+  updateproduct(p: Product) {
+    return this.http.put(`${this.apiUrl}/${p.id}`, p)
+  }
   deleteProduct(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }

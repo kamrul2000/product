@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
-export class Login {
+export class LoginComponent {
+  email: string = '';
+  password: string = '';
 
+  login() {
+    console.log('Email:', this.email);
+    console.log('Password:', this.password);
+  }
 }
